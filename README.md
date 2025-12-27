@@ -1,2 +1,2 @@
-# python-tools
-Python Tools for General Use Cases
+# scripting-tools
+Bash, Python, and other Scripting Tools for General Use Cases
