@@ -13,6 +13,6 @@ for item in "/Volumes"/*; do
 	if [[ ${volumes[@]} =~ $volume ]] 
 		then 
 			echo $volume
-			find "/Volumes/$volume/UHD Remux/" -type f -exec basename {} \; | sort > ~/movielist/ssd/$outputName.lst1
+			find "/Volumes/$volume/UHD Remux/" -type f -exec basename {} \; | sort  | grep -v "._" > ~/movielist/ssd/$outputName.lst
 	fi
 done
