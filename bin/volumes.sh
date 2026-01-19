@@ -7,7 +7,9 @@ volumes+=("BlueSheild1" "BlueSheild2", "T7 White")
 volumes+=("CrucialX10")
 
 #HD Remux
-volumes+=("Orange" "Teal", "Sky Blue", "Crucial")
+volumes+=("Orange" "Teal", "Sky Blue", "CrucialX9")
+
+formats=("UHD Remux" "HD Remux", "UHD", "HD","DVD","SD")
 
 
 # Loop through all items in the specified directory
