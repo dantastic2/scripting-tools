@@ -7,7 +7,7 @@ volumes+=("BlueSheild1" "BlueSheild2", "T7 White")
 volumes+=("CrucialX10")
 
 #HD Remux
-volumes+=("Orange" "Teal", "Sky Blue", "CrucialX9")
+volumes+=("Orange" "Teal", "Sky Blue", "CrucialX9", "Sandisk 2TB")
 
 formats=("UHD Remux" "HD Remux", "UHD", "HD","DVD","SD")
 
@@ -23,12 +23,12 @@ for item in "/Volumes"/*; do
 			files+=$(find "/Volumes/$volume/HD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			if [ ${#files} -gt 0 ] 
 			then
-				echo $files  > ~/movielist/ssd/$outputName.hdremux.lst
+				echo "$files"  > ~/movielist/ssd/$outputName.hdremux.lst
 			fi
 			filesUHD=$(find "/Volumes/$volume/UHD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			if [ ${#filesUHD} -gt 0 ] 
 			then
-				echo $filesUHD  > ~/movielist/ssd/$outputName.lst
+				echo "$filesUHD"  > ~/movielist/ssd/$outputName.lst
 			fi
 	fi
 done
