@@ -8,5 +8,9 @@ alias news="cd Downloads/Newslazer"
 cd ~/Downloads/NewsLazer/
 
 rena() {
-   python3 ~/scripts/py/rename.py $1
+   python3 ~/scripting-tools/py/rename.py $1
+}
+
+killf() {
+   while pkill Finder; do :; echo "killed Finder"; done
 }
