@@ -23,12 +23,12 @@ for item in "/Volumes"/*; do
 			files+=$(find "/Volumes/$volume/HD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			if [ ${#files} -gt 0 ] 
 			then
-				echo "$files"  > ~/movielist/ssd/$outputName.hdremux.lst
+				echo "$files"  > ~/scripting-tools/data/movielist/ssd/$outputName.hdremux.lst
 			fi
 			filesUHD=$(find "/Volumes/$volume/UHD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			if [ ${#filesUHD} -gt 0 ] 
 			then
-				echo "$filesUHD"  > ~/movielist/ssd/$outputName.lst
+				echo "$filesUHD"  > ~/scripting-tools/data/movielist/ssd/$outputName.lst
 			fi
 	fi
 done
