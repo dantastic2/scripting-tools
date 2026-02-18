@@ -32,3 +32,13 @@ for item in "/Volumes"/*; do
 			fi
 	fi
 done
+
+
+#find /Volumes/Seagate20X/UHD\ Remux/ -type f -exec basename {} \; | sort > ~/movielist/hdd/Seagate20X.lst
+
+
+#ls /Volumes/Crucial\ BX/TV > ~/tvlist/ssd/CrucialBX.lst;
+#cat ssd/* | sort > tv_ssd_comp.lst
+#ls /Volumes/Seagate20X/TV > ~/tvlist/hdd/Seagate20X.lst
+#cat hdd/* | sort > tv_hdd_comp.lst
+
