@@ -4,7 +4,7 @@ volumes=("T9 Black 1" "T9 Black 2" "T9 Black 3")
 volumes+=("T7 Black 1" "T7 Black 2" "T7 Black 3")
 volumes+=("T7 Grey 1" "T7 Grey 2" "T7 Grey 3" "T7 Grey 4")
 volumes+=("BlueSheild1" "BlueSheild2","T7 White", "T7 Blue")
-volumes+=("CrucialX10", "CrucialX9", "SanDisk2T")
+volumes+=("CrucialX10", "CrucialX9", "SanDisk2T", "WD 1TB")
 
 #HD Remux
 volumes+=("Orange" "Teal", "Sky Blue", "CrucialX9", "Sandisk 2TB")
