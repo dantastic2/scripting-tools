@@ -182,7 +182,7 @@ class Series():
                isCorrect = input("Is this the correct series [y/n] - " + result['name'] + " (" + result['year'] + ") ?   ")
                if isCorrect == 'y':
                   self.seriesId = result['tvdb_id']
-                  self.seriesReleaseYear = result['year']
+                  self.seriesReleaseYear = result['year'].translate(escapeChars)
                   self.seriesName = result['name']
                   self.seriesDirectory = self.seriesName
                   if self.seriesReleaseYear not in self.seriesName:
@@ -300,7 +300,7 @@ dirPaths = []
 
 #walk through all directories and files in current path
 for dirpath, dirnames, filenames in os.walk(Path.cwd()):
-    dirPaths.append(dirpath.partition(Path.cwd().name + "/")[2] + "/")
+    dirPaths.append(dirpath.translate(escapeChars).partition(Path.cwd().name + "/")[2] + "/")
     for filename in filenames:
         #allow only listed file extensions and filter files with banned strings
         if any(x in filename[-4:].lower() for x in fileExtensions) and not any(x in filename for x in filterFiles):        
@@ -309,11 +309,13 @@ for dirpath, dirnames, filenames in os.walk(Path.cwd()):
            if directory != "":
               directory=directory+"/"
            #if we find evidence that this is a TV episode: 
+           
            if re.search(episodeKeyRegex, filename) or re.search(r"[Ss]eason[' ',.]\d{1,2}", dirpath):
               episode =  Episode(filename,directory)
               videos.append(episode)
            #if we find evidence this is a music video
            elif "Music Videos" in dirpath:
+              print()
               musicVideos = "true" #TO ADD 
            #otherwise, assume it's a movie.  
            else:
