@@ -1,4 +1,7 @@
 
+datadir="/Users/dwatson/scripting-tools/data"
+
+
 #UHD Remux
 volumes=("T9 Black 1" "T9 Black 2" "T9 Black 3")
 volumes+=("T7 Black 1" "T7 Black 2" "T7 Black 3")
@@ -8,6 +11,10 @@ volumes+=("CrucialX10", "CrucialX9", "SanDisk2T", "WD 1TB")
 
 #HD Remux
 volumes+=("Orange" "Teal", "Sky Blue", "CrucialX9", "Sandisk 2TB")
+
+#Network Drives
+volumes+=("Seagate20A" "Seagate20B", "Seagate20C", "Seagate20D", "Seagate26", "Seagate16UHD")
+
 
 formats=("UHD Remux" "HD Remux", "UHD", "HD","DVD","SD")
 
@@ -19,26 +26,25 @@ for item in "/Volumes"/*; do
 	if [[ ${volumes[@]} =~ $volume ]] 
 		then 
 			echo $volume	
+			driveType="ssd"; #default
+			if [[ $volume =~ 'Seagate' ]]; then
+				driveType="hdd";
+			fi
 			files=$(find "/Volumes/$volume/Movies/HD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			files+=$(find "/Volumes/$volume/HD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			if [ ${#files} -gt 0 ] 
 			then
-				echo "$files"  > ~/scripting-tools/data/movielist/ssd/$outputName.hdremux.lst
+				echo "$files"  > $datadir/movielist/$driveType/$outputName.hdremux.lst
 			fi
 			filesUHD=$(find "/Volumes/$volume/UHD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			if [ ${#filesUHD} -gt 0 ] 
 			then
-				echo "$filesUHD"  > ~/scripting-tools/data/movielist/ssd/$outputName.lst
+				echo "$filesUHD"  > $datadir/movielist/$driveType/$outputName.uhdremux.lst
 			fi
+			df -h "/Volumes/$volume" > $datadir/$volume.diskSpace
 	fi
 done
 
-
-#find /Volumes/Seagate20X/UHD\ Remux/ -type f -exec basename {} \; | sort > ~/movielist/hdd/Seagate20X.lst
-
-
-#ls /Volumes/Crucial\ BX/TV > ~/tvlist/ssd/CrucialBX.lst;
-#cat ssd/* | sort > tv_ssd_comp.lst
-#ls /Volumes/Seagate20X/TV > ~/tvlist/hdd/Seagate20X.lst
-#cat hdd/* | sort > tv_hdd_comp.lst
+cat $datadir/movielist/ssd/*.uhdremux.* | sort > $datadir/movielist/uhdremux_ssd.lst
+cat $datadir/movielist/hdd/*.uhdremux.* | sort > $datadir/movielist/uhdremux_hdd.lst
 
