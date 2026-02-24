@@ -41,10 +41,12 @@ for item in "/Volumes"/*; do
 			then
 				echo "$filesUHD"  > $datadir/movielist/$driveType/$outputName.uhdremux.lst
 			fi
-			df -h "/Volumes/$volume" > $datadir/$volume.diskSpace
 	fi
 done
 
+df -h /volumes/* > $datadir/diskUsage.lst
 cat $datadir/movielist/ssd/*.uhdremux.* | sort > $datadir/movielist/uhdremux_ssd.lst
 cat $datadir/movielist/hdd/*.uhdremux.* | sort > $datadir/movielist/uhdremux_hdd.lst
+cat $datadir/movielist/ssd/*.hdremux.* | sort > $datadir/movielist/hdremux_ssd.lst
+cat $datadir/movielist/hdd/*.hdremux.* | sort > $datadir/movielist/hdremux_hdd.lst
 
