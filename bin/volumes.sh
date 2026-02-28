@@ -12,8 +12,13 @@ volumes+=("CrucialX10", "CrucialX9", "SanDisk2T", "WD 1TB")
 #HD Remux
 volumes+=("Orange" "Teal", "Sky Blue", "CrucialX9", "Sandisk 2TB")
 
+#TV
+volumes+=("Crucial B1" "Crucial B2", "Crucial B3", "Crucial B4", "Samsung8TB")
+
+
 #Network Drives
 volumes+=("Seagate20A" "Seagate20B", "Seagate20C", "Seagate20D", "Seagate26", "Seagate16UHD")
+
 
 
 formats=("UHD Remux" "HD Remux", "UHD", "HD","DVD","SD")
@@ -27,11 +32,20 @@ for item in "/Volumes"/*; do
 		then 
 			echo $volume	
 			driveType="ssd"; #default
+			mediaType="movielist" #default
 			if [[ $volume =~ 'Seagate' ]]; then
 				driveType="hdd";
 			fi
 			files=$(find "/Volumes/$volume/Movies/HD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			files+=$(find "/Volumes/$volume/HD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
+			filesTV=$(find "/Volumes/$volume/TV/" -maxdepth 1 -mindepth 1 -type d -exec basename {} \; 2>/dev/null | sort | grep -v "._")
+			filesTV+=$(find "/Volumes/$volume/TV - Complete/" -maxdepth 1 -mindepth 1 -type d -exec basename {} \; 2>/dev/null | sort | grep -v "._")
+
+			if [ ${#filesTV} -gt 0 ] 
+			then
+				echo "$filesTV"  > $datadir/tvlist/$driveType/$outputName.lst
+			fi
+
 			if [ ${#files} -gt 0 ] 
 			then
 				echo "$files"  > $datadir/movielist/$driveType/$outputName.hdremux.lst
@@ -39,7 +53,7 @@ for item in "/Volumes"/*; do
 			filesUHD=$(find "/Volumes/$volume/UHD Remux/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			if [ ${#filesUHD} -gt 0 ] 
 			then
-				echo "$filesUHD"  > $datadir/movielist/$driveType/$outputName.uhdremux.lst
+				echo "$filesUHD"  > $datadir/$mediaType/$driveType/$outputName.uhdremux.lst
 			fi
 	fi
 done
@@ -49,4 +63,6 @@ cat $datadir/movielist/ssd/*.uhdremux.* | sort > $datadir/movielist/uhdremux_ssd
 cat $datadir/movielist/hdd/*.uhdremux.* | sort > $datadir/movielist/uhdremux_hdd.lst
 cat $datadir/movielist/ssd/*.hdremux.* | sort > $datadir/movielist/hdremux_ssd.lst
 cat $datadir/movielist/hdd/*.hdremux.* | sort > $datadir/movielist/hdremux_hdd.lst
+cat $datadir/tvlist/hdd/* | sort > $datadir/tvlist/tv_hdd.lst
+cat $datadir/tvlist/ssd/* | sort > $datadir/tvlist/tv_ssd.lst
 
