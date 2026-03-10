@@ -11,11 +11,10 @@ from tvdb_v4_official import TVDB
 from term_image.image import from_url
 
 
-
-	   
 #Configuration: 
+datadir="/Users/dwatson/scripting-tools/data/"
 fileExtensions = ['.mkv', '.mp4', '.avi','.iso','.img','.mpg','.m4v']
-filterFiles = ['_unpack','sample','._'] #don't process files with this in filename
+filterFiles = ['_unpack','sample','._','Sample'] #don't process files with this in filename
 filterWords = ['REPACK','repack','AV1'] #remove these strings from output filename --- NOT YET IMPLEMENTED
 resolutions = "(1080p|1080i|2160p|720p|SD)"
 exceptionStrings = ['A.P.','Jr.','C.O.P.S.','Mr.','Dr.','Sr.','R.L.','Tosh.0','O.C.']
@@ -54,6 +53,15 @@ else:
 tvdbSeriesIds = []
 tvdbFeeds = []
 
+def writeToDisk(filename,data):
+   with open(datadir+filename, "w") as f:
+      json.dump(data, f, indent=4) 
+   return "success"
+
+def readFromDisk(filename):
+   with open(datadir+filename, "r") as f:
+      data = json.load(f)
+   return data
 
 def splitArray(inputArray,separator):
    outputArray = []
@@ -144,7 +152,6 @@ def getEpisodeTitle(episode):
    return ""
 
 
-
 @dataclass
 class Series():
     seriesName: str
@@ -153,7 +160,8 @@ class Series():
     seriesDirectory: str = ""
     def __post_init__(self):
       showTitleKey = self.seriesName.lower().replace(" ","")
-      for seriesIdDict in tvdbSeriesIds: 
+      tvdbSeriesIdsArray = readFromDisk("seriesIds.json")
+      for seriesIdDict in tvdbSeriesIdsArray: 
          try:
             if seriesIdDict["key"] == showTitleKey:
                self.seriesId = seriesIdDict["seriesId"]
@@ -191,6 +199,7 @@ class Series():
                   break
             dictionary = {"key": showTitleKey, "seriesId": self.seriesId, "name": self.seriesName, "year": self.seriesReleaseYear, "directory": self.seriesDirectory}
             tvdbSeriesIds.append(dictionary)
+            writeToDisk("seriesIds.json",tvdbSeriesIds)
          except Exception as e:
             print(f"An error occurred: {e}")    
 
