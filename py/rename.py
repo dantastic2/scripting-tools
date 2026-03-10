@@ -112,15 +112,13 @@ def getEpisodeTitle(episode):
    urlKey = tvdbSeriesId + seasonOrder + episode.season
    found = "false"
    all_data = []
-
-   for tvdbFeedDict in tvdbFeeds: 
-      try:
-         if tvdbFeedDict[urlKey]:
-            all_data = tvdbFeedDict[urlKey]
-            found = "true"
-            break
-      except KeyError:
-         pass
+   try:
+      tvdbFeedsArray = readFromDisk("tvdb/" + urlKey + ".json")
+      first_item = next(iter(tvdbFeedsArray.items()))
+      all_data = first_item[1]
+      found = "true"
+   except FileNotFoundError:
+      all_data = []
    if found == "false":
       try:
          response = requests.get(url)
@@ -132,7 +130,8 @@ def getEpisodeTitle(episode):
              current_page_data = response.json()
              all_data.extend(current_page_data.get("data", []))
          dictionary = {urlKey: all_data}
-         tvdbFeeds.append(dictionary)        
+         tvdbFeeds.append(dictionary)  
+         writeToDisk("tvdb/" + urlKey + ".json",dictionary)      
          """
          path, _ = urlretrieve(url,"../../.cache/." + urlKey)
          with open(path, 'r') as f:
