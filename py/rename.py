@@ -197,8 +197,8 @@ class Series():
                   print(self.seriesName + " -> " + self.seriesDirectory)
                   break
             dictionary = {"key": showTitleKey, "seriesId": self.seriesId, "name": self.seriesName, "year": self.seriesReleaseYear, "directory": self.seriesDirectory}
-            tvdbSeriesIds.append(dictionary)
-            writeToDisk("seriesIds.json",tvdbSeriesIds)
+            tvdbSeriesIdsArray.append(dictionary)
+            writeToDisk("seriesIds.json",tvdbSeriesIdsArray)
          except Exception as e:
             print(f"An error occurred: {e}")    
 
