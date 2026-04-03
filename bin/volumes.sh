@@ -88,4 +88,5 @@ cat $datadir/movielist/ssd/*.hdremux.* | sort > $datadir/movielist/hdremux_ssd.l
 cat $datadir/movielist/hdd/*.hdremux.* | sort > $datadir/movielist/hdremux_hdd.lst
 cat $datadir/tvlist/hdd/* | sort > $datadir/tvlist/tv_hdd.lst
 cat $datadir/tvlist/ssd/* | sort > $datadir/tvlist/tv_ssd.lst
+cat $datadir/diskUsage/* | sort > $datadir/diskUsage.lst
 
