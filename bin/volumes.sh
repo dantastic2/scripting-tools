@@ -5,6 +5,7 @@ mkdir -p "$datadir/tvlist/ssd/"
 mkdir -p "$datadir/tvlist/hdd/"
 mkdir -p "$datadir/movielist/ssd"
 mkdir -p "$datadir/movielist/hdd"
+mkdir -p "$datadir/diskUsage/"
 
 
 #UHD Remux
