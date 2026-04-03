@@ -25,7 +25,7 @@ volumes+=("Crucial B1" "Crucial B2", "Crucial B3", "Crucial B4", "Samsung8TB")
 
 
 #Network Drives
-volumes+=("Seagate20A" "Seagate20B", "Seagate20C", "Seagate20D", "Seagate26", "Seagate16UHD")
+#volumes+=("Seagate20A" "Seagate20B", "Seagate20C", "Seagate20D", "Seagate26", "Seagate16UHD")
 
 
 
@@ -75,7 +75,7 @@ for item in "/Volumes"/*; do
 			fi
 			
 			
-	df -h "/volumes/$volume" > "$datadir/diskUsage_$volume.lst"
+	df -h "/Volumes/$volume" | awk '{print $9, $4, $5}' | tail -1 | cut -c 10- > "$datadir/diskUsage/$volume.lst"
 	fi
 done
 
