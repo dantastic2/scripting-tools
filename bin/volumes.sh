@@ -16,7 +16,7 @@ volumes+=("BlueSheild1" "BlueSheild2","T7 White", "T7 Blue")
 volumes+=("CrucialX10", "CrucialX9", "SanDisk2T", "WD 1TB")
 
 #UHD
-volumes+=("CrucialGrey")
+volumes+=("CrucialGrey","CrucialGray")
 
 #HD Remux
 volumes+=("Orange" "Teal", "Sky Blue", "CrucialX9", "Sandisk 2TB")
@@ -63,7 +63,7 @@ for item in "/Volumes"/*; do
 			
 
 			filesUHD=$(find "/Volumes/$volume/UHD/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
-			filesUHD=$(find "/Volumes/$volume/Movies/UHD/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
+			filesUHD+=$(find "/Volumes/$volume/Movies/UHD/" -type f -exec basename {} \; 2>/dev/null | sort | grep -v "._")
 			if [ ${#filesUHD} -gt 0 ] 
 			then
 				echo "$filesUHD"  > $datadir/$mediaType/$driveType/$outputName.uhd.lst
