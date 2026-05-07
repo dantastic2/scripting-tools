@@ -1,5 +1,12 @@
 #Shell commands
 
+find . -exec mkvmerge -o 'tmp/{}' -s eng,en,en-us -a eng,en-us '{}' \;
+
+mkvmerge -o '/Users/dwatson/Downloads/ThunderCats (1985)/ThunderCats - Season 01/thunderkitty.mkv' -s eng,en,en-us -a eng,en-us  '/Users/dwatson/Downloads/ThunderCats (1985)/ThunderCats - Season 01/ThunderCats - S01E02 The Unholy Alliance.mkv'
+
+
+
+
 mediaInfo --output=JSON me\ falling\ on\ storage\ building\ ramp.mp4 | jq
 
 mediaInfo --Inform="Video;%CodecID%" me\ falling\ on\ storage\ building\ ramp.mp4
