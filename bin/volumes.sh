@@ -76,7 +76,7 @@ for item in "/Volumes"/*; do
 			fi
 			
 			
-	df -h "/Volumes/$volume" | awk '{print $9, $4, $5}' | tail -1 | cut -c 10- > "$datadir/diskUsage/$volume.lst"
+	df -h "/Volumes/$volume" | awk '{print $9, $10, $4, $5}' | tail -1 | cut -c 10- > "$datadir/diskUsage/$volume.lst"
 	fi
 done
 
